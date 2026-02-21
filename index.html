@@ -153,10 +153,20 @@
       background:var(--primarySoft);
       border:2px dashed var(--primary);
 
+      /* ✅ layout che va a capo SOLO tra "parole" */
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:.35em;
+
+      /* non servono più queste */
       word-break: normal;
       overflow-wrap: normal;
-      hyphens: none;
       white-space: normal;
+    }
+
+    .encoded .w{
+      white-space:nowrap; /* ✅ mai a capo dentro la parola */
     }
 
     .legend{
