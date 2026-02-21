@@ -326,6 +326,20 @@
       return out;
     }
 
+    function encodeWords(text){
+      // divide in "token": parole e spazi, così mantieni anche più spazi se mai servono
+      const tokens = text.split(/(\s+)/);
+
+      return tokens.map(t => {
+        // se è solo spazio lo lasciamo così
+        if (/^\s+$/.test(t)) return t;
+
+        // altrimenti codifichiamo e wrappiamo la parola
+        const coded = encode(t);
+        return `<span class="w">${coded}</span>`;
+      }).join("");
+    }
+
     function normalize(s){
       return (s || "")
         .trim()
@@ -337,7 +351,7 @@
     const userAnswer = document.getElementById("userAnswer");
     const msg = document.getElementById("message");
 
-    encodedEl.textContent = encode(plain);
+    encodedEl.innerHTML = encodeWords(plain);
 
     document.getElementById("checkBtn").addEventListener("click", () => {
       const ok = normalize(userAnswer.value) === normalize(plain);
